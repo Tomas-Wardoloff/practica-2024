@@ -9,7 +9,13 @@ def multiplicar_basico(numeros: Iterable[float]) -> float:
 
     Restricciones: No usar bibliotecas auxiliares (Numpy, math, pandas).
     """
-    pass # Completar
+    result = 1
+    if numeros.len() > 0:
+        for numero in numeros:
+            result *= numero
+    else:
+        result = 0
+    return result
 
 
 # NO MODIFICAR - INICIO
