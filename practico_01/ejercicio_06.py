@@ -69,12 +69,23 @@ if __name__ == "__main__":
 
 
 def numeros_al_final_recursivo(lista: List[Union[float, str]]) -> List[Union[float, str]]:
-    """CHALLENGE OPCIONAL - Re-escribir de forma recursiva."""
+    
+    """
+    Toma una lista de enteros y strings y devuelve una lista con todos los
+    elementos numéricos al final.
+    CHALLENGE OPCIONAL - Re-escribir de forma recursiva. """
+
     if len(lista) == 0:
         return []
-    if type(lista[0]) is str:
-        return [lista[0]] + numeros_al_final_recursivo(lista[1:])
-    return numeros_al_final_recursivo(lista[1:]) + [lista[0]]
+    
+    # Separar la lista en strings y números
+    primeros = numeros_al_final_recursivo([x for x in lista[1:] if isinstance(x, str)])
+    numeros = numeros_al_final_recursivo([x for x in lista[1:] if isinstance(x, (int, float))])
+
+    if isinstance(lista[0], str):
+        return [lista[0]] + primeros + numeros
+    else:
+        return primeros + [lista[0]] + numeros
 
 
 # NO MODIFICAR - INICIO
