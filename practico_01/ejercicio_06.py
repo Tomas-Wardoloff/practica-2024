@@ -69,7 +69,6 @@ def numeros_al_final_recursivo(lista: List[Union[float, str]]) -> List[Union[flo
     """CHALLENGE OPCIONAL - Re-escribir de forma recursiva. """
     if len(lista) == 0:
         return []
-    
     primeros = numeros_al_final_recursivo([x for x in lista[1:] if isinstance(x, str)])
     numeros = numeros_al_final_recursivo([x for x in lista[1:] if isinstance(x, (int, float))])
 
