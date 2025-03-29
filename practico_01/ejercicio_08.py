@@ -9,14 +9,11 @@ def superposicion_basico(lista_1: Iterable[Any], lista_2: Iterable[Any]) -> bool
 
     Restricción: Utilizar bucles anidados.
     """
-    for  item in lista_1:
+    for item in lista_1:
         for item2 in lista_2:
             if item == item2:
                 return True
     return False
-
-
-
 
 
 # NO MODIFICAR - INICIO

@@ -9,7 +9,7 @@ def maximo_encadenado(a: float, b: float, c: float) -> float:
     """
     if a > b:
         if a > c:
-            return a   
+            return a
         else:
             return c
     else:

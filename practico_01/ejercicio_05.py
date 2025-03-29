@@ -39,10 +39,10 @@ def multiplicar_reduce(numeros: Iterable[float]) -> float:
     """
     if len(numeros) == 0:
         return 0
-    return reduce(lambda x, y: 1*x*y, numeros)
+    return reduce(lambda x, y: 1 * x * y, numeros)
 
 # NO MODIFICAR - INICIO
-if __name__ == "__main__":
+if  __name__ == "__main__":
     assert multiplicar_reduce([1, 2, 3, 4]) == 24
     assert multiplicar_reduce([2, 5]) == 10
     assert multiplicar_reduce([]) == 0
