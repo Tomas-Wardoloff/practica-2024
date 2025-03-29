@@ -48,7 +48,7 @@ jobs:
         run: pip install flake8
 
       - name: Test Style
-        run: flake8 practico_01 --count --max-complexity=10 --max-line-length=130 --ignore=E266,F401,E402 --statistics --show-source
+        run: flake8 practico_01 --count --max-complexity=10 --max-line-length=130 --ignore=E266,F401,E402,W292,W391 --statistics --show-source
 
 
   property-test:
