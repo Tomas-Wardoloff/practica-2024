@@ -51,6 +51,7 @@ def superposicion_any(lista_1: Iterable[Any], lista_2: Iterable[Any]) -> bool:
     """
     return any(map(lambda item: item in lista_2, lista_1))
 
+
 # NO MODIFICAR - INICIO
 test_list = [1, "hello", 35.20]
 assert superposicion_any(test_list, (2, "world", 35.20))

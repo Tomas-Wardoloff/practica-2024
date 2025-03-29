@@ -13,7 +13,6 @@ def numeros_al_final_basico(lista: List[Union[float, str]]) -> List[Union[float,
     return lista
 
 
-
 # NO MODIFICAR - INICIO
 assert numeros_al_final_basico([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 1, 10]
 # NO MODIFICAR - FIN
@@ -39,7 +38,7 @@ def numeros_al_final_sorted(lista: List[Union[float, str]]) -> List[Union[float,
     """Re-escribir utilizando la función sorted con una custom key.
     Referencia: https://docs.python.org/3/library/functions.html#sorted
     """
-    return sorted(lista, key=lambda x: type(x) is int) 
+    return sorted(lista, key=lambda x: type(x) is int)
 
 
 # NO MODIFICAR - INICIO
@@ -71,7 +70,6 @@ def numeros_al_final_recursivo(lista: List[Union[float, str]]) -> List[Union[flo
     if len(lista) == 0:
         return []
     
-    # Separar la lista en strings y números
     primeros = numeros_al_final_recursivo([x for x in lista[1:] if isinstance(x, str)])
     numeros = numeros_al_final_recursivo([x for x in lista[1:] if isinstance(x, (int, float))])
 

@@ -21,7 +21,7 @@ def combinar_basico(nombres: List[str], precios: List[float]) -> Tuple[Any]:
     """
     rta = []
     for i in range(len(nombre_articulos)):
-        rta.append((nombre_articulos[i],precio_articulos[i]))
+        rta.append((nombre_articulos[i], precio_articulos[i]))
     return tuple(rta)
 
 
@@ -49,7 +49,6 @@ def combinar_enumerate(nombres: List[str], precios: List[float], ids: List[int])
     resultado = []
     for i, nombre in enumerate(nombres):
         resultado.append((nombre, precios[i], ids[i]))
-    
     return tuple(resultado)
 
 
@@ -75,7 +74,7 @@ def combinar_zip(nombres: List[str], precios: List[float], ids: List[int]) -> Tu
     Referencia: https://docs.python.org/3/library/functions.html#zip
     """
     rta = []
-    for item in zip(nombre_articulos,precio_articulos,id_articulos):
+    for item in zip(nombre_articulos, precio_articulos, id_articulos):
         rta.append(item)
     return tuple(rta)
 
@@ -107,6 +106,7 @@ def combinar_zip_args(*args) -> Tuple[Any]:
     for item in zip(*args):
         rta.append(item)
     return tuple(rta)
+
 
 # NO MODIFICAR - INICIO
 respuesta = (

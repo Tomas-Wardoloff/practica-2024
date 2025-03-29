@@ -48,7 +48,6 @@ def tiene_pares_any(numeros: Iterable[int]) -> bool:
     Referencia: https://docs.python.org/3/library/functions.html#any
     """
     return any(map(lambda num: num % 2 == 0, numeros))
-    
 
 
 # NO MODIFICAR - INICIO
