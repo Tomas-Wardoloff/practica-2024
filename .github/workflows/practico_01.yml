@@ -70,7 +70,7 @@ jobs:
         run: pip install pytest hypothesis
 
       - name: Run Property Tests
-        run: pytest practico_01/practico_01_property_test.py --hypothesis-show-statistics
+        run: pytest practico_01/practico_01_test.py --hypothesis-show-statistics
 
 
   challenge-test:
