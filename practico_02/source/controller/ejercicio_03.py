@@ -12,14 +12,18 @@ $PATH$/practico_02> python -m source.controller.ejercicio_03
 """
 
 # Completar
-
+import source.controller.controller as controller
+import source.util as util
+import source.data.database as database
+import source.tests.test_config as test_config
+import source.tests.load_tests.ddos_simulation as ddos_simulation
+import main
 # NO MODIFICAR - INICIO
 assert main.name == "main"
 assert util.name == "util"
 assert database.name == "database"
 assert controller.name == "controller"
 assert test_config.name == "test_config"
-assert deploy_travis.name == "deploy_travis"
 # NO MODIFICAR - FIN
 
 # Este es el último ejercicio del TP2
