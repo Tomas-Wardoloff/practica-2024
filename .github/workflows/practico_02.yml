@@ -28,7 +28,17 @@ jobs:
       - name: Cambiar al directorio practico_02
         run: cd practico_02
 
+      # Listar archivos para verificar la estructura
+      - name: Listar archivos en el directorio
+        run: ls -la
 
+      # Cambiar al directorio practico_02
+      - name: Cambiar al directorio practico_02
+        run: cd practico_02
+
+      # Añadir el directorio al PYTHONPATH
+      - name: Añadir el directorio al PYTHONPATH
+        run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
       - name: Run Basic Tests
         run: pytest practico_02/practico_02_test.py
 
