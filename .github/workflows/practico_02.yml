@@ -1,4 +1,4 @@
-name: Práctico 03
+name: Práctico 02
 
 on:
   push:
@@ -24,6 +24,9 @@ jobs:
 
       - name: Install Dependencies
         run: pip install pytest
+
+      - name: Listar archivos en el directorio
+        run: ls -la
 
       - name: Run Basic Tests
         run: pytest practico_02/practico_02_test.py
