@@ -17,6 +17,17 @@ class Article:
     # NO MODIFICAR - FIN
 
     # Completar
+    def __str__(self):
+        return str(self.name)
+    
+    def __repr__(self):
+        return f"Article('{self.name}')"
+
+    def __eq__(self, other):
+        if not isinstance(other, Article):
+            return False
+        return self.name == other.name  # Compara por nombre
+
 
 
 # NO MODIFICAR - INICIO
@@ -50,6 +61,27 @@ class ShoppingCart:
     # NO MODIFICAR - FIN
 
     # Completar
+    def __str__(self):
+        a = []
+        for i in self.articles:
+            a.append(str(i))
+        return str(a)
+
+
+    def __repr__(self):
+        return f"ShoppingCart({repr(self.articles)})"
+
+
+    def __eq__(self, other):
+        if not isinstance(other, ShoppingCart):
+            return False
+        return sorted(self.articles, key=lambda x: x.name) == sorted(other.articles, key=lambda x: x.name)
+
+
+    def __add__(self, other):
+        for i in other.articles:
+            self.articles.append(i)
+        return self
 
 
 # NO MODIFICAR - INICIO
