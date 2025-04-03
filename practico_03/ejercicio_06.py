@@ -48,24 +48,14 @@ class ShoppingCart:
         return self
 
     def remove(self, remove_article: Article) -> ShoppingCart:
-        new_articles = []
-
-        for article in self.articles:
-            if article != remove_article:
-                new_articles.append(article)
-
-        self.articles = new_articles
-
+        self.articles = [article for article in self.articles if article != remove_article]
         return self
 
     # NO MODIFICAR - FIN
 
     # Completar
     def __str__(self):
-        a = []
-        for i in self.articles:
-            a.append(str(i))
-        return str(a)
+        return str([str(article) for article in self.articles])
 
 
     def __repr__(self):
@@ -79,9 +69,7 @@ class ShoppingCart:
 
 
     def __add__(self, other):
-        for i in other.articles:
-            self.articles.append(i)
-        return self
+        return ShoppingCart(self.articles + other.articles)
 
 
 # NO MODIFICAR - INICIO
