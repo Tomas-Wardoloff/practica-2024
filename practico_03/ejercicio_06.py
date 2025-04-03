@@ -1,5 +1,3 @@
-"""Magic Methods"""
-
 from __future__ import annotations
 from typing import List
 
@@ -19,7 +17,7 @@ class Article:
     # Completar
     def __str__(self):
         return str(self.name)
-    
+
     def __repr__(self):
         return f"Article('{self.name}')"
 
@@ -27,7 +25,6 @@ class Article:
         if not isinstance(other, Article):
             return False
         return self.name == other.name  # Compara por nombre
-
 
 
 # NO MODIFICAR - INICIO
@@ -57,16 +54,13 @@ class ShoppingCart:
     def __str__(self):
         return str([str(article) for article in self.articles])
 
-
     def __repr__(self):
         return f"ShoppingCart({repr(self.articles)})"
-
 
     def __eq__(self, other):
         if not isinstance(other, ShoppingCart):
             return False
         return sorted(self.articles, key=lambda x: x.name) == sorted(other.articles, key=lambda x: x.name)
-
 
     def __add__(self, other):
         return ShoppingCart(self.articles + other.articles)

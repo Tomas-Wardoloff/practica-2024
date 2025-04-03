@@ -39,6 +39,7 @@ assert not Persona("Julia", 16, "M", 65, 162.4).es_mayor_edad()
 
 from dataclasses import dataclass
 
+
 @dataclass
 class Persona:
     """Re-Escribir utilizando DataClasses"""

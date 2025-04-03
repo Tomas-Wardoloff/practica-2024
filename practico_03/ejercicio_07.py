@@ -1,8 +1,5 @@
-"""Deepcopy y Listas de Objetos"""
-
 from dataclasses import dataclass
 from typing import List
-
 
 # NO MODIFICAR - INICIO
 @dataclass
@@ -12,9 +9,7 @@ class Articulo:
 
 # NO MODIFICAR - FIN
 
-
 from copy import deepcopy
-
 
 def actualizar_precio(articulos: List[Articulo], porcentaje: float) -> List[Articulo]:
     """Toma una lista de articulos y un porcentaje, al precio de cada articulo
@@ -23,7 +18,6 @@ def actualizar_precio(articulos: List[Articulo], porcentaje: float) -> List[Arti
     Restricción: NO se debe modificar la clase ni los tests.
     Hint: Usar deepcopy (https://docs.python.org/3/library/copy.html#copy.deepcopy)
     """
-    
     # Completar
     new_articulos = deepcopy(articulos)
     for i in new_articulos:
@@ -49,5 +43,5 @@ assert precios_actualizados
 # Test de precios
 for precio_viejo, precio_nuevo in zip(precios_desactualizados, precios_actualizados):
     assert precio_nuevo == precio_viejo * (1 + porcentaje_aumento / 100)
-    
+
 # NO MODIFICAR - FIN
