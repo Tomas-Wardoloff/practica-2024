@@ -3,7 +3,7 @@
 
 class Auto:
     """La clase auto tiene dos propiedades, precio y marca. La marca se define
-    obligatoriamente al construir la clase y siempre que se devuelve, se 
+    obligatoriamente al construir la clase y siempre que se devuelve, se
     devuelve con la primer letra en mayúscula y no se puede modificar. El precio
     puede modificarse pero cuando se muestra, se redondea a 2 decimales.
 
