@@ -1,5 +1,6 @@
 """Herencia"""
 
+
 # NO MODIFICAR - INICIO
 class Animal:
     def __init__(self, edad: int = 0):
