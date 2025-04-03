@@ -2,14 +2,18 @@ from dataclasses import dataclass
 from typing import List
 
 # NO MODIFICAR - INICIO
+
+
 @dataclass
 class Articulo:
     nombre: str
     precio: float
 
+
 # NO MODIFICAR - FIN
 
 from copy import deepcopy
+
 
 def actualizar_precio(articulos: List[Articulo], porcentaje: float) -> List[Articulo]:
     """Toma una lista de articulos y un porcentaje, al precio de cada articulo
