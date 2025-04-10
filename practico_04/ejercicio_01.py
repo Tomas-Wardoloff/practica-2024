@@ -38,9 +38,9 @@ def borrar_tabla():
 
 # NO MODIFICAR - INICIO
 def reset_tabla(func):
-    def func_wrapper():
-        crear_tabla()
-        func()
+    def wrapper():
         borrar_tabla()
-    return func_wrapper
+        crear_tabla()
+        return func()
+    return wrapper
 # NO MODIFICAR - FIN

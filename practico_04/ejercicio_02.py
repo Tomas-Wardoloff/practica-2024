@@ -13,7 +13,7 @@ def agregar_persona(nombre, nacimiento, dni, altura):
     cursor.execute('''
         INSERT INTO Persona (Nombre, FechaNacimiento, DNI, Altura)
         VALUES (?, ?, ?, ?)
-    ''', (nombre, nacimiento.strftime('%Y-%m-%d'), dni, altura))
+    ''', (nombre, nacimiento, dni, altura))
     
     conn.commit()
     id_insertado = cursor.lastrowid
