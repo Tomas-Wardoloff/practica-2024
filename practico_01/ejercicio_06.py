@@ -7,7 +7,10 @@ def numeros_al_final_basico(lista: List[Union[float, str]]) -> List[Union[float,
     """Toma una lista de enteros y strings y devuelve una lista con todos los
     elementos numéricos al final.
     """
-    pass # Completar
+    for item in lista[::-1]: #con el SLICING recorre la lista al reves
+        if type(item) is str:
+            lista.insert(0, lista.pop(lista.index(item))) #saca el elemento de la lista y lo inserta al principio, por lo que se va a ir moviendo hacia la izquierda
+    return lista 
 
 
 # NO MODIFICAR - INICIO
@@ -20,8 +23,7 @@ assert numeros_al_final_basico([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 
 
 def numeros_al_final_comprension(lista: List[Union[float, str]]) -> List[Union[float, str]]:
     """Re-escribir utilizando comprensión de listas."""
-    pass # Completar
-
+    return [x for x in lista if type(x) is str] + [x for x in lista if type(x) is not str] 
 
 # NO MODIFICAR - INICIO
 assert numeros_al_final_comprension([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 1, 10]
@@ -35,7 +37,7 @@ def numeros_al_final_sorted(lista: List[Union[float, str]]) -> List[Union[float,
     """Re-escribir utilizando la función sorted con una custom key.
     Referencia: https://docs.python.org/3/library/functions.html#sorted
     """
-    pass # Completar
+    return sorted(lista, key = lambda x: type(x) is int) 
 
 
 # NO MODIFICAR - INICIO
@@ -50,7 +52,7 @@ def numeros_al_final_filter(lista: List[Union[float, str]]) -> List[Union[float,
     """CHALLENGE OPCIONAL - Re-escribir utilizando la función filter.
     Referencia: https://docs.python.org/3/library/functions.html#filter
     """
-    pass # Completar
+    return list(filter(lambda x: type(x) is str, lista)) + list(filter(lambda x: type(x) is not str, lista))
 
 
 # NO MODIFICAR - INICIO
@@ -64,7 +66,15 @@ if __name__ == "__main__":
 
 def numeros_al_final_recursivo(lista: List[Union[float, str]]) -> List[Union[float, str]]:
     """CHALLENGE OPCIONAL - Re-escribir de forma recursiva."""
-    pass # Completar
+    if len(lista) == 0:
+        return []
+    strings = numeros_al_final_recursivo([x for x in lista[1:] if isinstance(x, str)])
+    numeros = numeros_al_final_recursivo([x for x in lista[1:] if isinstance(x, (int, float))])
+
+    if isinstance(lista[0], str):
+        return [lista[0]] + strings + numeros
+    else:
+        return strings + [lista[0]] + numeros
 
 
 # NO MODIFICAR - INICIO

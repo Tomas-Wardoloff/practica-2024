@@ -1,6 +1,9 @@
 """Slicing."""
 
 
+import math
+
+
 def es_palindromo(palabra: str) -> bool:
     """Toma un string y devuelve un booleano en base a si se lee igual al
     derecho y al revés.
@@ -8,7 +11,7 @@ def es_palindromo(palabra: str) -> bool:
     Restricción: No utilizar bucles - Usar Slices de listas.
     Referencia: https://docs.python.org/3/tutorial/introduction.html#lists
     """
-    pass # Completar
+    return palabra == palabra[::-1] # El slice [::-1] devuelve la palabra al revés
 
 
 # NO MODIFICAR - INICIO
@@ -28,7 +31,8 @@ def mitad(palabra: str) -> str:
     Restricción: No utilizar bucles - Usar Slices de listas.
     Referencia: https://docs.python.org/3/tutorial/introduction.html#lists
     """
-    pass # Completar
+    #redondear un float hacia arriba
+    return palabra[:math.ceil(len(palabra) / 2):] #uso la funcion ceil para redondear hacia arriba, pordria usar floor para redondear hacia abajo
 
 
 # NO MODIFICAR - INICIO
