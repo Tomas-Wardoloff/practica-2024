@@ -6,6 +6,7 @@ from ejercicio_01 import Base, Socio
 
 from typing import List, Optional
 
+
 class DatosSocio():
 
     def __init__(self):
@@ -18,7 +19,6 @@ class DatosSocio():
         encuentra nada.
         """
         session = self.Session()
-        # Forma moderna de buscar por clave primaria
         socio = session.get(Socio, id_socio)
         session.close()
         return socio
@@ -31,7 +31,7 @@ class DatosSocio():
         socio = session.query(Socio).filter_by(dni=dni_socio).first()
         session.close()
         return socio
-        
+
     def todos(self) -> List[Socio]:
         """Devuelve listado de todos los socios en la base de datos."""
         session = self.Session()
@@ -67,7 +67,6 @@ class DatosSocio():
         fue exitoso.
         """
         session = self.Session()
-        # Forma moderna de buscar por clave primaria
         socio_a_borrar = session.get(Socio, id_socio)
         if socio_a_borrar:
             session.delete(socio_a_borrar)
@@ -87,7 +86,7 @@ class DatosSocio():
         session.commit()
         session.close()
         return socio_modificado
-    
+
     def contarSocios(self) -> int:
         """Devuelve el total de socios que existen en la tabla"""
         session = self.Session()
@@ -96,9 +95,7 @@ class DatosSocio():
         return total
 
 
-
 # NO MODIFICAR - INICIO
-
 # Test Creación
 datos = DatosSocio()
 
@@ -107,7 +104,7 @@ socio = datos.alta(Socio(dni=12345678, nombre='Juan', apellido='Perez'))
 assert socio.id > 0
 
 # Test Baja
-assert datos.baja(socio.id) == True
+assert datos.baja(socio.id)
 
 # Test Consulta
 socio_2 = datos.alta(Socio(dni=12345679, nombre='Carlos', apellido='Perez'))

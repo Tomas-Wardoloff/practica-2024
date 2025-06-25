@@ -3,7 +3,9 @@
 from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, Integer, String
 
+
 Base = declarative_base()
+
 
 class Socio(Base):
     """Implementar un modelo Socio a traves de Alchemy que cuente con los siguientes campos:
@@ -25,6 +27,5 @@ class Socio(Base):
         Son iguales si son del mismo tipo y tienen el mismo id.
         """
         if not isinstance(other, Socio):
-            # No se puede comparar con un tipo diferente
             return NotImplemented
         return self.id == other.id
