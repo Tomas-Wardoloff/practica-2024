@@ -10,15 +10,15 @@ from ejercicio_07 import agregar_peso
 
 
 def listar_pesos(id_persona):
-    """Implementar la funcion listar_pesos, que devuelva el historial de pesos 
+    """Implementar la funcion listar_pesos, que devuelva el historial de pesos
     para una persona dada.
 
     Debe validar:
-    - Que el ID de la persona ingresada existe (reutilizando las funciones ya 
+    - Que el ID de la persona ingresada existe (reutilizando las funciones ya
      implementadas).
 
     Debe devolver:
-    - Lista de (fecha, peso), donde fecha esta representado por el siguiente 
+    - Lista de (fecha, peso), donde fecha esta representado por el siguiente
     formato: AAAA-MM-DD.
 
     Ejemplo:
@@ -32,7 +32,7 @@ def listar_pesos(id_persona):
 
     - False en caso de no cumplir con alguna validacion.
     """
-    
+
     # 1. Validar que la persona existe
     if not buscar_persona(id_persona):
         return False
@@ -53,7 +53,7 @@ def listar_pesos(id_persona):
         (datetime.datetime.fromisoformat(fila[0]).strftime('%Y-%m-%d'), fila[1])
         for fila in resultados
     ]
-    
+
     return lista_formateada
 
 
@@ -70,7 +70,7 @@ def pruebas():
     ]
     assert pesos_juan == pesos_esperados
     # id incorrecto
-    assert listar_pesos(200) == False
+    assert listar_pesos(200) is False
 
 
 if __name__ == '__main__':

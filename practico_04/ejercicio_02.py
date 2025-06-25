@@ -1,24 +1,25 @@
 """Base de Datos SQL - Alta"""
+
 import sqlite3
 import datetime
-from ejercicio_01 import reset_tabla,  crear_tabla
+from ejercicio_01 import reset_tabla, crear_tabla
 
-crear_tabla()
+
 def agregar_persona(nombre, nacimiento, dni, altura):
-    """Implementar la funcion agregar_persona, que inserte un registro en la 
+    """Implementar la funcion agregar_persona, que inserte un registro en la
     tabla Persona y devuelva los datos ingresados el id del nuevo registro."""
     conn = sqlite3.connect("tutorial.db")
     cursor = conn.cursor()
-    
+
     cursor.execute('''
         INSERT INTO Persona (Nombre, FechaNacimiento, DNI, Altura)
         VALUES (?, ?, ?, ?)
     ''', (nombre, nacimiento, dni, altura))
-    
-    conn.commit()
+
     id_insertado = cursor.lastrowid
+    conn.commit()
     conn.close()
-    
+
     return id_insertado
 
 
@@ -30,6 +31,8 @@ def pruebas():
     assert id_juan > 0
     assert id_marcela > id_juan
 
+
 if __name__ == '__main__':
+    crear_tabla()  # Se asegura de que la tabla exista antes de las pruebas
     pruebas()
 # NO MODIFICAR - FIN

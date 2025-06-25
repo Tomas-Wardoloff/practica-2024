@@ -24,13 +24,13 @@ def actualizar_persona(id_persona, nombre, nacimiento, dni, altura):
         (nombre, nacimiento, dni, altura, id_persona)
     )
 
-
     # Se guarda los cambios y se cierra la conexion
     conexion.commit()
     conexion.close()
 
     # Se devuelve True si se actualizo un registro, False si no se encontro el registro
     return cursor.rowcount > 0
+
 
 # NO MODIFICAR - INICIO
 @reset_tabla
@@ -39,6 +39,7 @@ def pruebas():
     actualizar_persona(id_juan, 'juan carlos perez', datetime.datetime(1988, 4, 16), 32165497, 181)
     assert buscar_persona(id_juan) == (1, 'juan carlos perez', datetime.datetime(1988, 4, 16), 32165497, 181)
     assert actualizar_persona(123, 'nadie', datetime.datetime(1988, 4, 16), 12312312, 181) is False
+
 
 if __name__ == '__main__':
     pruebas()

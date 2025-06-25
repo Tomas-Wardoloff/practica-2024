@@ -1,7 +1,8 @@
 """Base de Datos SQL - Creación de tablas auxiliares"""
 
 from ejercicio_01 import borrar_tabla, crear_tabla
-import sqlite3 
+import sqlite3
+
 
 def crear_tabla_peso():
     """Implementar la funcion crear_tabla_peso, que cree una tabla PersonaPeso con:
@@ -24,9 +25,8 @@ def crear_tabla_peso():
     conexion.close()
 
 
-
 def borrar_tabla_peso():
-    """Implementar la funcion borrar_tabla, que borra la tabla creada 
+    """Implementar la funcion borrar_tabla, que borra la tabla creada
     anteriormente."""
 
     conexion = sqlite3.connect("tutorial.db")
@@ -37,6 +37,7 @@ def borrar_tabla_peso():
     ''')
     conexion.commit()
     conexion.close()
+
 
 # NO MODIFICAR - INICIO
 def reset_tabla(func):
