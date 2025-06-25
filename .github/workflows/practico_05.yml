@@ -23,7 +23,7 @@ jobs:
           architecture: 'x64'
 
       - name: Install Dependencies
-        run: pip install pytest
+        run: pip install pytest sqlalchemy
 
       - name: Run Basic Tests
         run: pytest practico_05/practico_05_test.py
