@@ -1,10 +1,12 @@
 """Base de datos SQL - Listar"""
 
 import datetime
+import sqlite3
 
-from practico_04.ejercicio_02 import agregar_persona
-from practico_04.ejercicio_06 import reset_tabla
-from practico_04.ejercicio_07 import agregar_peso
+from ejercicio_02 import agregar_persona
+from ejercicio_04 import buscar_persona  # Importamos la función para validar
+from ejercicio_06 import reset_tabla
+from ejercicio_07 import agregar_peso
 
 
 def listar_pesos(id_persona):
@@ -13,7 +15,7 @@ def listar_pesos(id_persona):
 
     Debe validar:
     - Que el ID de la persona ingresada existe (reutilizando las funciones ya 
-     mplementadas).
+     implementadas).
 
     Debe devolver:
     - Lista de (fecha, peso), donde fecha esta representado por el siguiente 
@@ -30,7 +32,29 @@ def listar_pesos(id_persona):
 
     - False en caso de no cumplir con alguna validacion.
     """
-    return []
+    
+    # 1. Validar que la persona existe
+    if not buscar_persona(id_persona):
+        return False
+
+    # 2. Conectar a la BD y obtener los datos
+    conn = sqlite3.connect("tutorial.db")
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT Fecha, Peso FROM PersonaPeso WHERE IdPersona = ? ORDER BY Fecha",
+        (id_persona,)
+    )
+    resultados = cursor.fetchall()
+    conn.close()
+
+    # 3. Formatear la lista de resultados al formato requerido
+    # Usamos una "list comprehension" para hacerlo de forma concisa.
+    lista_formateada = [
+        (datetime.datetime.fromisoformat(fila[0]).strftime('%Y-%m-%d'), fila[1])
+        for fila in resultados
+    ]
+    
+    return lista_formateada
 
 
 # NO MODIFICAR - INICIO
