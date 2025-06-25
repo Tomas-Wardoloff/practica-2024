@@ -1,9 +1,8 @@
-"""Base de Datos SQL - Uso de múltiples tablas"""
-
 import datetime
-
-from practico_04.ejercicio_02 import agregar_persona
-from practico_04.ejercicio_06 import reset_tabla
+import sqlite3
+from ejercicio_02 import agregar_persona
+from ejercicio_04 import buscar_persona
+from ejercicio_06 import reset_tabla
 
 
 def agregar_peso(id_persona, fecha, peso):
@@ -19,9 +18,47 @@ def agregar_peso(id_persona, fecha, peso):
     Debe devolver:
     - ID del peso registrado.
     - False en caso de no cumplir con alguna validacion."""
+    
+    if not buscar_persona(id_persona):
+        return False
 
-    pass # Completar
+    ultima_fecha_registrada = buscar_peso(id_persona)
 
+    if ultima_fecha_registrada and fecha <= ultima_fecha_registrada:
+        return False
+
+    conn = sqlite3.connect("tutorial.db")
+    cursor = conn.cursor()
+    cursor.execute(
+        "INSERT INTO PersonaPeso (IdPersona, Fecha, Peso) VALUES (?, ?, ?)",
+        (id_persona, fecha, peso)
+    )
+    nuevo_id = cursor.lastrowid
+    conn.commit()
+    conn.close()
+    
+    return nuevo_id
+
+
+def buscar_peso(id_persona):
+    """
+    Busca la fecha del último registro de peso para una persona.
+    Devuelve un objeto datetime con la fecha si lo encuentra, o None si no.
+    """
+    conn = sqlite3.connect("tutorial.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT Fecha FROM PersonaPeso WHERE IdPersona = ? ORDER BY Fecha DESC LIMIT 1",
+        (id_persona,)
+    )
+    resultado = cursor.fetchone()
+    conn.close()
+
+    if resultado:
+        return datetime.datetime.fromisoformat(resultado[0])
+    
+    return None
 
 # NO MODIFICAR - INICIO
 @reset_tabla
