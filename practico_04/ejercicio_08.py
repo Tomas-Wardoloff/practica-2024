@@ -1,11 +1,11 @@
 """Base de datos SQL - Listar"""
-
+import sqlite3
 import datetime
 
-from practico_04.ejercicio_02 import agregar_persona
-from practico_04.ejercicio_06 import reset_tabla
-from practico_04.ejercicio_07 import agregar_peso
-
+from ejercicio_02 import agregar_persona
+from ejercicio_06 import reset_tabla
+from ejercicio_07 import agregar_peso
+from ejercicio_04 import buscar_persona
 
 def listar_pesos(id_persona):
     """Implementar la funcion listar_pesos, que devuelva el historial de pesos 
@@ -30,7 +30,17 @@ def listar_pesos(id_persona):
 
     - False en caso de no cumplir con alguna validacion.
     """
-    return []
+    if not buscar_persona(id_persona):
+        return False
+    conn = sqlite3.connect("tutorial.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT Fecha, Peso FROM PersonaPeso WHERE IdPersona = ? ORDER BY Fecha", (id_persona,))
+    resultados = cursor.fetchall()
+    conn.close()
+    if resultados:
+        return [(fecha[:10], peso) for fecha, peso in resultados]
+    else:
+        return []
 
 
 # NO MODIFICAR - INICIO
