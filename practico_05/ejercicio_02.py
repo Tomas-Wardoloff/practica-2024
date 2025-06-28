@@ -9,49 +9,107 @@ from typing import List, Optional
 class DatosSocio():
 
     def __init__(self):
-        pass # Completar
+        self.engine = create_engine('sqlite:///:memory:')
+        Base.metadata.create_all(self.engine)
+        self.Session = sessionmaker(bind=self.engine, expire_on_commit=False)
 
     def buscar(self, id_socio: int) -> Optional[Socio]:
         """Devuelve la instancia del socio, dado su id. Devuelve None si no 
         encuentra nada.
         """
-        pass # Completar
+        session = self.Session()
+        socio = session.get(Socio, id_socio)
+        session.close()
+        return socio
 
     def buscar_dni(self, dni_socio: int) -> Optional[Socio]:
         """Devuelve la instancia del socio, dado su dni. Devuelve None si no 
         encuentra nada.
         """
-        pass # Completar
+        session = self.Session()
+        socio = session.query(Socio).filter(Socio.dni == dni_socio).first()
+        session.close()
+        return socio
         
     def todos(self) -> List[Socio]:
         """Devuelve listado de todos los socios en la base de datos."""
-        pass # Completar
+        session = self.Session()
+        socios = session.query(Socio).all()
+        session.close()
+        return socios
 
     def borrar_todos(self) -> bool:
         """Borra todos los socios de la base de datos. Devuelve True si el 
         borrado fue exitoso.
         """
-        pass # Completar
+        session = self.Session()
+        try:
+            session.query(Socio).delete()
+            session.commit()
+            return True
+        except Exception as e:
+            session.rollback()
+            return False
+        finally:
+            session.close() 
 
     def alta(self, socio: Socio) -> Socio:
         """Agrega un nuevo socio a la tabla y lo devuelve"""
-        pass # Completar
+        session = self.Session()
+        session.add(socio)
+        try:
+            session.commit()
+            return socio
+        except Exception as e:
+            session.rollback()
+            raise e
+        finally:
+            session.close()
 
     def baja(self, id_socio: int) -> bool:
         """Borra el socio especificado por el id. Devuelve True si el borrado 
         fue exitoso.
         """
-        pass # Completar
+        session = self.Session()
+        try:
+            result = session.query(Socio).filter(Socio.id == id_socio).delete()
+            session.commit()
+            return result > 0
+        except Exception as e:
+            session.rollback()
+            return False
+        finally:
+            session.close()
 
     def modificacion(self, socio: Socio) -> Socio:
         """Guarda un socio con sus datos modificados. Devuelve el Socio 
         modificado.
         """
-        pass # Completar
+        session = self.Session()
+        existing_socio = session.get(Socio, socio.id)
+        if not existing_socio:
+            session.close()
+            raise ValueError("Socio no encontrado")
+        
+        existing_socio.nombre = socio.nombre
+        existing_socio.apellido = socio.apellido
+        existing_socio.dni = socio.dni
+        
+        try:
+            session.commit()
+            return existing_socio
+        except Exception as e:
+            session.rollback()
+            raise e
+        finally:
+            session.close()
     
     def contarSocios(self) -> int:
         """Devuelve el total de socios que existen en la tabla"""
-        pass # Completar
+        session = self.Session()
+        count = session.query(Socio).count()
+        session.close()
+        return count
 
 
 
