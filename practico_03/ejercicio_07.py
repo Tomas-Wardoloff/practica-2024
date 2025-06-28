@@ -24,7 +24,10 @@ def actualizar_precio(articulos: List[Articulo], porcentaje: float) -> List[Arti
     Hint: Usar deepcopy (https://docs.python.org/3/library/copy.html#copy.deepcopy)
     """
     
-    # Completar
+    articulos_actualizados = deepcopy(articulos)
+    for articulo in articulos_actualizados:
+        articulo.precio *= (1 + porcentaje / 100)
+    return articulos_actualizados
 
 
 # NO MODIFICAR - INICIO

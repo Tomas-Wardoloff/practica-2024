@@ -14,9 +14,16 @@ class Article:
     def __init__(self, name: str) -> None:
         self.name = name
 
+    def __repr__(self):
+        return f"Article({repr(self.name)})"
+    
+    def __eq__(self, other: Article) -> bool:
+        if not isinstance(other, Article):
+            return NotImplemented
+        return self.name == other.name
+    
     # NO MODIFICAR - FIN
 
-    # Completar
 
 
 # NO MODIFICAR - INICIO
@@ -31,6 +38,22 @@ class ShoppingCart:
             self.articles = []
         else:
             self.articles = articles
+
+    def __str__(self):
+        return str([article.name for article in self.articles])
+    
+    def __repr__(self):
+        return f"ShoppingCart(articles={self.articles})"
+
+    def __eq__(self, other: ShoppingCart) -> bool:
+        if not isinstance(other, ShoppingCart):
+            return NotImplemented
+        return sorted(self.articles, key=repr) == sorted(other.articles, key=repr)
+    
+    def __add__(self, other: ShoppingCart) -> ShoppingCart:
+        if not isinstance(other, ShoppingCart):
+            return NotImplemented
+        return ShoppingCart(self.articles + other.articles)
 
     def add(self, article: Article) -> ShoppingCart:
         self.articles.append(article)
@@ -49,7 +72,7 @@ class ShoppingCart:
 
     # NO MODIFICAR - FIN
 
-    # Completar
+    
 
 
 # NO MODIFICAR - INICIO

@@ -1,6 +1,9 @@
 """Variables y Métodos de Clase"""
 
 
+from typing import Optional
+
+
 class Articulo:
     """Clase con "nombre" como variable de instancia y un id incremental
     generado automáticamente.
@@ -9,8 +12,18 @@ class Articulo:
         - Utilizar sólamente el constructor (__init__) y un método de
           clase (@classmethod) con una variable de clase
     """
+    _last_id = 0
 
-    # Completar
+    def __init__(self, nombre: Optional[str] = None) -> None:
+        
+        self.nombre = nombre
+        self.id_ = Articulo._last_id + 1
+        Articulo.incrementar()
+
+    @classmethod
+    def incrementar(cls):
+        cls._last_id += 1
+
 
 
 # NO MODIFICAR - INICIO

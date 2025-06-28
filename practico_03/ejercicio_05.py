@@ -11,7 +11,21 @@ class Auto:
     
     Referencia: https://docs.python.org/3/library/functions.html#property"""
 
-    # Completar
+    def __init__(self, nombre: str, precio: float) -> None:
+        self._precio = precio
+        self._nombre = nombre
+    
+    def getprecio(self) -> float:
+        return round(self._precio, 2)
+    
+    def setprecio(self, precio: float) -> None:
+        self._precio = precio
+
+    def getnombre(self) -> str:
+        return self._nombre.capitalize()
+    
+    precio = property(getprecio, setprecio, doc="Precio del auto")
+    nombre = property(getnombre, doc="Nombre del auto")
 
 
 # NO MODIFICAR - INICIO
@@ -33,13 +47,26 @@ except AttributeError:
 ###############################################################################
 
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 @dataclass
 class Auto:
     """Re-Escribir utilizando DataClasses"""
 
-    # Completar
+    _nombre: str = field(repr=False)
+    _precio: float = field(repr=False)
+
+    @property
+    def precio(self) -> float:
+        return round(self._precio, 2)
+    
+    @precio.setter
+    def precio(self, precio: float) -> None:
+        self._precio = precio
+
+    @property
+    def nombre(self) -> str:
+        return self._nombre.capitalize()
 
 
 # NO MODIFICAR - INICIO
