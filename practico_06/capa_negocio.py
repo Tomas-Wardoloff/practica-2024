@@ -71,7 +71,7 @@ class NegocioSocio(object):
 
         # 2. Si todas las validaciones pasan, delegar el alta a la capa de datos.
         self.datos.alta(socio)
-        
+
         # 3. Devolver True indicando que la operación fue exitosa.
         return True
 
