@@ -29,24 +29,31 @@ class NegocioSocio(object):
         """
         Devuelve la instancia del socio, dado su id.
         Devuelve None si no encuentra nada.
+        Delega la búsqueda a la capa de datos.
         :rtype: Socio
         """
-        return
+        # Simplemente delegamos la llamada a la capa de datos.
+        socio = self.datos.buscar(id_socio)
+        return socio
 
     def buscar_dni(self, dni_socio):
         """
         Devuelve la instancia del socio, dado su dni.
         Devuelve None si no encuentra nada.
+        Delega la búsqueda a la capa de datos.
         :rtype: Socio
         """
-        return
+        # Delegamos la llamada a la capa de datos.
+        return self.datos.buscar_dni(dni_socio)
 
     def todos(self):
         """
         Devuelve listado de todos los socios.
+        Delega la consulta a la capa de datos.
         :rtype: list
         """
-        return []
+        # Delegamos la llamada a la capa de datos.
+        return self.datos.todos()
 
     def alta(self, socio):
         """
@@ -57,7 +64,16 @@ class NegocioSocio(object):
         :type socio: Socio
         :rtype: bool
         """
-        return False
+        # 1. Validar reglas de negocio. Si alguna falla, lanzará una excepción.
+        self.regla_1(socio)
+        self.regla_2(socio)
+        self.regla_3()
+
+        # 2. Si todas las validaciones pasan, delegar el alta a la capa de datos.
+        self.datos.alta(socio)
+        
+        # 3. Devolver True indicando que la operación fue exitosa.
+        return True
 
     def baja(self, id_socio):
         """
@@ -65,7 +81,10 @@ class NegocioSocio(object):
         Devuelve True si el borrado fue exitoso.
         :rtype: bool
         """
-        return False
+        # Delegamos directamente la baja a la capa de datos.
+        # La capa de datos se encargará de manejar si el ID no existe.
+        self.datos.baja(id_socio)
+        return True
 
     def modificacion(self, socio):
         """
@@ -76,7 +95,18 @@ class NegocioSocio(object):
         :type socio: Socio
         :rtype: bool
         """
-        return False
+        # 1. Validar las reglas de negocio.
+        # La consigna pide validar la regla 2.
+        self.regla_2(socio)
+        # Es crucial validar también la regla 1 para evitar que al modificar
+        # se asigne un DNI que ya pertenece a otro socio.
+        self.regla_1(socio)
+
+        # 2. Si las validaciones pasan, delegar la modificación a la capa de datos.
+        self.datos.modificacion(socio)
+
+        # 3. Devolver True indicando éxito.
+        return True
 
     def regla_1(self, socio):
         """
@@ -85,7 +115,12 @@ class NegocioSocio(object):
         :raise: DniRepetido
         :return: bool
         """
-        return False
+        socio_existente = self.buscar_dni(socio.dni)
+        # Si se encontró un socio con ese DNI y NO es el mismo socio que estamos validando
+        # (importante para el caso de la modificación), entonces el DNI está repetido.
+        if socio_existente and socio_existente.id != socio.id:
+            raise DniRepetido(f"El DNI {socio.dni} ya está registrado para otro socio.")
+        return True
 
     def regla_2(self, socio):
         """
@@ -94,7 +129,12 @@ class NegocioSocio(object):
         :raise: LongitudInvalida
         :return: bool
         """
-        return False
+        nombre_valido = self.MIN_CARACTERES <= len(socio.nombre) <= self.MAX_CARACTERES
+        apellido_valido = self.MIN_CARACTERES <= len(socio.apellido) <= self.MAX_CARACTERES
+
+        if not (nombre_valido and apellido_valido):
+            raise LongitudInvalida("El nombre y el apellido deben tener entre 3 y 15 caracteres.")
+        return True
 
     def regla_3(self):
         """
@@ -102,4 +142,7 @@ class NegocioSocio(object):
         :raise: MaximoAlcanzado
         :return: bool
         """
-        return False
+        # Comparamos la cantidad actual de socios con el máximo permitido.
+        if len(self.todos()) >= self.MAX_SOCIOS:
+            raise MaximoAlcanzado(f"Se ha alcanzado el límite de {self.MAX_SOCIOS} socios.")
+        return True
